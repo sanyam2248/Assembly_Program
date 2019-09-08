@@ -1,4 +1,3 @@
-
 .data
 .text
 .global main
@@ -29,7 +28,7 @@ main:    			                       # int main()
 	com r6, r0                                 #compare k1 and i	
 	bgt lp2
 	add r7, r4, r6                            #qq=j*j*j+k*k*k
-	com r7, i                                    #compare qq and i
+	com r7, r0                                    #compare qq and i
 	beq lp4
 	jmp lp3
 	
