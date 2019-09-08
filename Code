@@ -1,0 +1,78 @@
+
+.data
+.text
+.global main
+main:    			                       # int main()
+						# {
+	mov r0,0                                    #i=0
+	mov r1,0                                    #count=0
+	
+	.lp1                                             #loop
+	add r0, r0, 1                              #i=i+1
+	com r1,1                                    #comparing count<1
+	beq l87
+	mov r2,0                                    #c=0
+	mov r3,0                                    #j=0
+	
+	.lp2       
+	add r3, r3, 1                              #j++
+	mul r4, r3, r3                            #q=j*j
+	mul r4, r4, r3                            #j1=j*j*j
+	com r4, r0                                 #compare j*j*j and i 
+	bgt l86
+	mov r5, r3                                 #k=j
+	
+	.lp3
+	add r5, r5, 1                              #k=k+1
+	mul r6, r3, r3                            #q1=k*k
+	mul r6, r4, r3                            #k1=k*k*k
+	com r6, r0                                 #compare k1 and i	
+	bgt lp2
+	add r7, r4, r6                            #qq=j*j*j+k*k*k
+	com r7, i                                    #compare qq and i
+	beq lp4
+	jmp lp3
+	
+	.lp4
+	add r2, r2, 1                             #c=c+1
+	
+	.l86
+	com r2, 2                                  #compare c==2
+	beq l87                                     #go to return
+	jmp.l1                                       #go to while loop
+	
+	.l87
+	//print r0
+	jmp l88
+	
+	.l88
+	xor	%eax, %eax	        # return 0;
+	ret
+			              	        # }
+
+Cpp code
+
+int main() 
+{ 
+	int i = 0, count = 0; 
+	while (count < 1) 
+	{ 
+               i++;
+	int c = 0; 
+	for (int j = 1; j*j*j <= i; j++) 
+		{int k=0
+                                      for (int k = j + 1; k *k*k<=i; k++) 
+			 {
+                                                    k++;
+                                                    if (j*j*j + k*k*k == i) 
+				c++; 
+                                            }
+                             }
+	if (c == 2) 
+	{ 
+		count++; 
+		cout <<i;
+	}
+	}
+	return 0;
+}
